@@ -7,6 +7,7 @@ function openWin(formName){
         alert('指定したフォームが取得できませんでした');
         return;
     }
+	// なんかいれてみた
     let win = window.open('about:blank', formName);
     form.target = formName;
     form.submit();
