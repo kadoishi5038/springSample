@@ -30,7 +30,7 @@
           <td th:text="${#dates.format(user.createDate, 'yyyy/MM/dd')}"></td>
           <td th:text="${#dates.format(user.deleteDate, 'yyyy/MM/dd')}"></td>
           <td>
-			 <form th:action="@{/user/{id}(id=*{id})}" method="GET" th:name="'form'+ *{id}">
+			 <form th:action="@{/user/{id}/testedit(id=*{id})}" method="GET" th:name="'form'+ *{id}">
 			     <input type="button" value="詳細" th:onclick="|openWin('form*{id}');|" class="btn btn-secondary" />
 			 </form>
 		  </td>

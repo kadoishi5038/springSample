@@ -107,6 +107,18 @@ public class UserController {
     model.addAttribute("userUpdateRequest", userUpdateRequest);
     return "user/edit";
   }
+  /**
+   * ユーザー編集画面を表示
+   * @param id 表示するユーザーID
+   * @param model Model
+   * @return ユーザー編集画面
+   */
+  @GetMapping("/user/{id}/testedit")
+  public String displaytestList(Model model) {
+	    List<User> userlist = userService.searchAll();
+	    model.addAttribute("userlist", userlist);
+	    return "user/testedit";
+  }
 
   /**
    * ユーザー更新
