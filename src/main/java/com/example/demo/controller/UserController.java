@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.demo.dto.UserRequest;
 import com.example.demo.dto.UserUpdateRequest;
 import com.example.demo.entity.User;
+import com.example.demo.service.BookinfoService;
 import com.example.demo.service.UserService;
 
 /**
@@ -31,6 +32,12 @@ public class UserController {
    */
   @Autowired
   private UserService userService;
+
+  /**
+   * bookinfo情報 Service
+   */
+  @Autowired
+  private BookinfoService bookinfoService;
 
   /**
    * ユーザー情報一覧画面を表示
