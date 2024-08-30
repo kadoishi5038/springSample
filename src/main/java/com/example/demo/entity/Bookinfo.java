@@ -40,4 +40,5 @@ public class Bookinfo implements Serializable {
    */
   @Column(name = "price")
   private String price;
+  
 }

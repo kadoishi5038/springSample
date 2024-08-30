@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.demo.dto.UserRequest;
 import com.example.demo.dto.UserUpdateRequest;
+import com.example.demo.entity.Bookinfo;
 import com.example.demo.entity.User;
 import com.example.demo.service.BookinfoService;
 import com.example.demo.service.UserService;
@@ -32,6 +35,12 @@ public class UserController {
    */
   @Autowired
   private UserService userService;
+
+  /**
+   * jdbc
+   */
+  @Autowired
+  JdbcTemplate jdbc;
 
   /**
    * bookinfo情報 Service
@@ -114,6 +123,20 @@ public class UserController {
     model.addAttribute("userUpdateRequest", userUpdateRequest);
     return "user/edit";
   }
+
+//  /**
+//   * ユーザー編集画面を表示
+//   * @param id 表示するユーザーID
+//   * @param model Model
+//   * @return ユーザー編集画面
+//   */
+//  @GetMapping("/user/{id}/testedit")
+//  public String displaytestList(Model model) {
+//	    List<User> userlist = userService.searchAll();
+//	    model.addAttribute("userlist", userlist);
+//	    return "user/testedit";
+//  }
+
   /**
    * ユーザー編集画面を表示
    * @param id 表示するユーザーID
@@ -121,10 +144,23 @@ public class UserController {
    * @return ユーザー編集画面
    */
   @GetMapping("/user/{id}/testedit")
-  public String displaytestList(Model model) {
-	    List<User> userlist = userService.searchAll();
-	    model.addAttribute("userlist", userlist);
-	    return "user/testedit";
+  public String displayBooklist(@PathVariable Long id, Model model) {
+	  List<Map<String, Object>> getList = jdbc.queryForList("SELECT * FROM bookinfo" + " WHERE id = ?", id);
+	  List<Bookinfo> bookinfoList = new ArrayList<>();
+      for (Map<String, Object> map : getList) {
+          // Userインスタンスの生成
+          Bookinfo bookinfo = new Bookinfo();
+          // Userインスタンスに取得したデータをセットする
+          bookinfo.setId((Long) map.get("id")); // パスワード
+          bookinfo.setIsbn((String) map.get("isbn")); // ユーザー名
+          bookinfo.setTitle((String) map.get("title")); // ロール
+//          bookinfo.setPrice((Integer) map.get("price")); // 年齢
+          // 結果返却用のListに追加
+          bookinfoList.add(bookinfo);
+      }
+	  model.addAttribute("bookinfo", bookinfoList);
+
+	  return "user/testedit";
   }
 
   /**
