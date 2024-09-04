@@ -18,7 +18,7 @@ function add(){
  var table = document.getElementById("tblbody");
  var row = table.insertRow(-1);
   //this adds row in 0 index i.e. first place
- row.innerHTML = "<td> </td><td> </td><td> </td><td> </td><td> </td><td> </td><td> </td>";
+ row.innerHTML = "<td><input /></td><td><input /></td><td><input /></td><td><input /></td>";
 }
 
 //以下、末尾行削除処理
