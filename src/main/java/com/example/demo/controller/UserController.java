@@ -58,8 +58,8 @@ public class UserController {
     List<User> userlist = userService.searchAll();
     model.addAttribute("userlist", userlist);
     return "user/list";
-  }
-
+  }  
+  
   /**
    * ユーザー新規登録画面を表示
    * @param model Model
